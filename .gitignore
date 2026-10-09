@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+
+# Built corpus — project internals, stays local / on Kaggle
+data/train.txt
+data/val.txt
+*.zip
