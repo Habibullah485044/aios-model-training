@@ -1,0 +1,10 @@
+{
+  "files_read": 7245,
+  "files_skipped_size": 0,
+  "files_skipped_dup": 349,
+  "lines_dropped_secret": 2,
+  "bytes": 19901071,
+  "ledger_records": 10062,
+  "train_docs": 16961,
+  "val_docs": 346
+}

@@ -32,5 +32,11 @@ scratch/
 .cred_in
 .cred_in2
 
+# ---- built corpus (from the 135M instruct fine-tune pipeline) ----
+# Project internals: stays local / on Kaggle.
+data/train.txt
+data/val.txt
+*.zip
+
 # NOTE: .freebuff/project-id is a local Freebuff Desktop pointer and is
 # explicitly not to be committed (see .freebuff/.gitignore in the tree).
