@@ -1,0 +1,16 @@
+# Normalize line endings to LF in the repository AND in checkouts.
+#
+# Every source file in this project is authored with LF endings, and the
+# measured checks (B2 assembler grid, B3 linker, B4 runtime) compare byte
+# sequences against GNU as+ld. A CRLF checkout would change those bytes and
+# invalidate the results, so LF is enforced everywhere.
+
+* text=auto eol=lf
+
+# Binary artifacts - never touched by line-ending conversion.
+*.elf binary
+*.o binary
+*.bin binary
+*.safetensors binary
+*.gguf binary
+*.zip binary
