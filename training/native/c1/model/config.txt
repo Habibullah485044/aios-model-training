@@ -1,0 +1,12 @@
+model_type qwen2
+n_layer 24
+d_model 896
+n_head 14
+n_kv_head 2
+d_head 64
+d_ff 4864
+n_vocab 151936
+rms_eps 1e-06
+rope_theta 1000000.0
+tied 1
+n_params 494032768

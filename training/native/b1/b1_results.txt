@@ -1,0 +1,12 @@
+=== B1 pass check: 132-byte exit42 ELF64 ===
+emitted b1_exit42.elf (132 bytes)
+struct parse: e_entry=0x400078 PT_LOAD RWX base=0x400000 filesz=132 OK
+$ file /mnt/c/Users/OBSESSION/Desktop/AIMODEL TEST/training/native/b1/b1_exit42.elf
+/mnt/c/Users/OBSESSION/Desktop/AIMODEL TEST/training/native/b1/b1_exit42.elf: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, no section header
+$ readelf -a -W /mnt/c/Users/OBSESSION/Desktop/AIMODEL TEST/training/native/b1/b1_exit42.elf
+readelf -a: clean (empty stderr), entry 0x400078, 1 PT_LOAD
+$ objdump -D -b binary -m i386:x86-64 -M intel /mnt/c/Users/OBSESSION/Desktop/AIMODEL TEST/training/native/b1/b1_exit42.elf.code.bin
+objdump -b binary -M intel (12 code bytes): ['mov eax,0x3c', 'mov edi,0x2a', 'syscall']
+$ /mnt/c/Users/OBSESSION/Desktop/AIMODEL TEST/training/native/b1/b1_exit42.elf
+run: exit status = 42
+B1 PASSED

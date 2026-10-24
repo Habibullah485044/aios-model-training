@@ -1,0 +1,310 @@
+=== B3 pass check: 3 programs vs GNU as + GNU ld ===
+GNU as: GNU assembler (GNU Binutils for Ubuntu) 2.46
+GNU ld: GNU ld (GNU Binutils for Ubuntu) 2.46
+--- 01_xmod (forward order) ---
+$ as --64 -o /tmp/aios_native/b3/01_xmod_fwd_00_m1.o /tmp/aios_native/b3/01_xmod_fwd_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/01_xmod_fwd_01_m2.o /tmp/aios_native/b3/01_xmod_fwd_01_m2.s
+$ as --64 -o /tmp/aios_native/b3/01_xmod_fwd_02_m3.o /tmp/aios_native/b3/01_xmod_fwd_02_m3.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/01_xmod_fwd.gnu.elf /tmp/aios_native/b3/01_xmod_fwd_00_m1.o /tmp/aios_native/b3/01_xmod_fwd_01_m2.o /tmp/aios_native/b3/01_xmod_fwd_02_m3.o
+01_xmod [m1.s+m2.s+m3.s]: 348 bytes == 348 (gnu: 348 code + 0 nop padding), 8 symbols matched, entry 0x401000, exit ours=1 gnu=1 expected=1
+01_xmod_fwd: OK (identical)
+--- 01_xmod (reverse order) ---
+$ as --64 -o /tmp/aios_native/b3/01_xmod_rev_00_m3.o /tmp/aios_native/b3/01_xmod_rev_00_m3.s
+$ as --64 -o /tmp/aios_native/b3/01_xmod_rev_01_m2.o /tmp/aios_native/b3/01_xmod_rev_01_m2.s
+$ as --64 -o /tmp/aios_native/b3/01_xmod_rev_02_m1.o /tmp/aios_native/b3/01_xmod_rev_02_m1.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/01_xmod_rev.gnu.elf /tmp/aios_native/b3/01_xmod_rev_00_m3.o /tmp/aios_native/b3/01_xmod_rev_01_m2.o /tmp/aios_native/b3/01_xmod_rev_02_m1.o
+01_xmod [m3.s+m2.s+m1.s]: 345 bytes == 345 (gnu: 345 code + 0 nop padding), 8 symbols matched, entry 0x4010bc, exit ours=1 gnu=1 expected=1
+01_xmod_rev: OK (identical)
+--- 02_align (forward order) ---
+$ as --64 -o /tmp/aios_native/b3/02_align_fwd_00_m1.o /tmp/aios_native/b3/02_align_fwd_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/02_align_fwd_01_m2.o /tmp/aios_native/b3/02_align_fwd_01_m2.s
+$ as --64 -o /tmp/aios_native/b3/02_align_fwd_02_m3.o /tmp/aios_native/b3/02_align_fwd_02_m3.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/02_align_fwd.gnu.elf /tmp/aios_native/b3/02_align_fwd_00_m1.o /tmp/aios_native/b3/02_align_fwd_01_m2.o /tmp/aios_native/b3/02_align_fwd_02_m3.o
+02_align [m1.s+m2.s+m3.s]: 87 bytes == 87 (gnu: 87 code + 0 nop padding), 4 symbols matched, entry 0x401000, exit ours=2 gnu=2 expected=2
+02_align_fwd: OK (identical)
+--- 02_align (reverse order) ---
+$ as --64 -o /tmp/aios_native/b3/02_align_rev_00_m3.o /tmp/aios_native/b3/02_align_rev_00_m3.s
+$ as --64 -o /tmp/aios_native/b3/02_align_rev_01_m2.o /tmp/aios_native/b3/02_align_rev_01_m2.s
+$ as --64 -o /tmp/aios_native/b3/02_align_rev_02_m1.o /tmp/aios_native/b3/02_align_rev_02_m1.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/02_align_rev.gnu.elf /tmp/aios_native/b3/02_align_rev_00_m3.o /tmp/aios_native/b3/02_align_rev_01_m2.o /tmp/aios_native/b3/02_align_rev_02_m1.o
+02_align [m3.s+m2.s+m1.s]: 91 bytes == 91 (gnu: 91 code + 0 nop padding), 4 symbols matched, entry 0x40102a, exit ours=2 gnu=2 expected=2
+02_align_rev: OK (identical)
+--- 03_order (forward order) ---
+$ as --64 -o /tmp/aios_native/b3/03_order_fwd_00_m1.o /tmp/aios_native/b3/03_order_fwd_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/03_order_fwd_01_m2.o /tmp/aios_native/b3/03_order_fwd_01_m2.s
+$ as --64 -o /tmp/aios_native/b3/03_order_fwd_02_m3.o /tmp/aios_native/b3/03_order_fwd_02_m3.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/03_order_fwd.gnu.elf /tmp/aios_native/b3/03_order_fwd_00_m1.o /tmp/aios_native/b3/03_order_fwd_01_m2.o /tmp/aios_native/b3/03_order_fwd_02_m3.o
+03_order [m1.s+m2.s+m3.s]: 403 bytes == 403 (gnu: 403 code + 0 nop padding), 7 symbols matched, entry 0x401000, exit ours=3 gnu=3 expected=3
+03_order_fwd: OK (identical)
+--- 03_order (reverse order) ---
+$ as --64 -o /tmp/aios_native/b3/03_order_rev_00_m3.o /tmp/aios_native/b3/03_order_rev_00_m3.s
+$ as --64 -o /tmp/aios_native/b3/03_order_rev_01_m2.o /tmp/aios_native/b3/03_order_rev_01_m2.s
+$ as --64 -o /tmp/aios_native/b3/03_order_rev_02_m1.o /tmp/aios_native/b3/03_order_rev_02_m1.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/03_order_rev.gnu.elf /tmp/aios_native/b3/03_order_rev_00_m3.o /tmp/aios_native/b3/03_order_rev_01_m2.o /tmp/aios_native/b3/03_order_rev_02_m1.o
+03_order [m3.s+m2.s+m1.s]: 386 bytes == 386 (gnu: 386 code + 0 nop padding), 7 symbols matched, entry 0x4010c1, exit ours=3 gnu=3 expected=3
+03_order_rev: OK (identical)
+--- gap/align grid ---
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p0_00_m1.o /tmp/aios_native/b3/grid_a64_p0_00_m1.s
+  /tmp/aios_native/b3/grid_a64_p0_00_m1.s: Assembler messages:
+  /tmp/aios_native/b3/grid_a64_p0_00_m1.s:17: Warning: .space repeat count is zero, ignored
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p0_01_m2.o /tmp/aios_native/b3/grid_a64_p0_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p0.gnu.elf /tmp/aios_native/b3/grid_a64_p0_00_m1.o /tmp/aios_native/b3/grid_a64_p0_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p1_00_m1.o /tmp/aios_native/b3/grid_a64_p1_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p1_01_m2.o /tmp/aios_native/b3/grid_a64_p1_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p1.gnu.elf /tmp/aios_native/b3/grid_a64_p1_00_m1.o /tmp/aios_native/b3/grid_a64_p1_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p2_00_m1.o /tmp/aios_native/b3/grid_a64_p2_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p2_01_m2.o /tmp/aios_native/b3/grid_a64_p2_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p2.gnu.elf /tmp/aios_native/b3/grid_a64_p2_00_m1.o /tmp/aios_native/b3/grid_a64_p2_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p3_00_m1.o /tmp/aios_native/b3/grid_a64_p3_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p3_01_m2.o /tmp/aios_native/b3/grid_a64_p3_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p3.gnu.elf /tmp/aios_native/b3/grid_a64_p3_00_m1.o /tmp/aios_native/b3/grid_a64_p3_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p4_00_m1.o /tmp/aios_native/b3/grid_a64_p4_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p4_01_m2.o /tmp/aios_native/b3/grid_a64_p4_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p4.gnu.elf /tmp/aios_native/b3/grid_a64_p4_00_m1.o /tmp/aios_native/b3/grid_a64_p4_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p5_00_m1.o /tmp/aios_native/b3/grid_a64_p5_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p5_01_m2.o /tmp/aios_native/b3/grid_a64_p5_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p5.gnu.elf /tmp/aios_native/b3/grid_a64_p5_00_m1.o /tmp/aios_native/b3/grid_a64_p5_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p6_00_m1.o /tmp/aios_native/b3/grid_a64_p6_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p6_01_m2.o /tmp/aios_native/b3/grid_a64_p6_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p6.gnu.elf /tmp/aios_native/b3/grid_a64_p6_00_m1.o /tmp/aios_native/b3/grid_a64_p6_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p7_00_m1.o /tmp/aios_native/b3/grid_a64_p7_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p7_01_m2.o /tmp/aios_native/b3/grid_a64_p7_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p7.gnu.elf /tmp/aios_native/b3/grid_a64_p7_00_m1.o /tmp/aios_native/b3/grid_a64_p7_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p8_00_m1.o /tmp/aios_native/b3/grid_a64_p8_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p8_01_m2.o /tmp/aios_native/b3/grid_a64_p8_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p8.gnu.elf /tmp/aios_native/b3/grid_a64_p8_00_m1.o /tmp/aios_native/b3/grid_a64_p8_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p9_00_m1.o /tmp/aios_native/b3/grid_a64_p9_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p9_01_m2.o /tmp/aios_native/b3/grid_a64_p9_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p9.gnu.elf /tmp/aios_native/b3/grid_a64_p9_00_m1.o /tmp/aios_native/b3/grid_a64_p9_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p10_00_m1.o /tmp/aios_native/b3/grid_a64_p10_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p10_01_m2.o /tmp/aios_native/b3/grid_a64_p10_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p10.gnu.elf /tmp/aios_native/b3/grid_a64_p10_00_m1.o /tmp/aios_native/b3/grid_a64_p10_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p11_00_m1.o /tmp/aios_native/b3/grid_a64_p11_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p11_01_m2.o /tmp/aios_native/b3/grid_a64_p11_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p11.gnu.elf /tmp/aios_native/b3/grid_a64_p11_00_m1.o /tmp/aios_native/b3/grid_a64_p11_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p12_00_m1.o /tmp/aios_native/b3/grid_a64_p12_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p12_01_m2.o /tmp/aios_native/b3/grid_a64_p12_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p12.gnu.elf /tmp/aios_native/b3/grid_a64_p12_00_m1.o /tmp/aios_native/b3/grid_a64_p12_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p13_00_m1.o /tmp/aios_native/b3/grid_a64_p13_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p13_01_m2.o /tmp/aios_native/b3/grid_a64_p13_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p13.gnu.elf /tmp/aios_native/b3/grid_a64_p13_00_m1.o /tmp/aios_native/b3/grid_a64_p13_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p14_00_m1.o /tmp/aios_native/b3/grid_a64_p14_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p14_01_m2.o /tmp/aios_native/b3/grid_a64_p14_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p14.gnu.elf /tmp/aios_native/b3/grid_a64_p14_00_m1.o /tmp/aios_native/b3/grid_a64_p14_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p15_00_m1.o /tmp/aios_native/b3/grid_a64_p15_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p15_01_m2.o /tmp/aios_native/b3/grid_a64_p15_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p15.gnu.elf /tmp/aios_native/b3/grid_a64_p15_00_m1.o /tmp/aios_native/b3/grid_a64_p15_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p16_00_m1.o /tmp/aios_native/b3/grid_a64_p16_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p16_01_m2.o /tmp/aios_native/b3/grid_a64_p16_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p16.gnu.elf /tmp/aios_native/b3/grid_a64_p16_00_m1.o /tmp/aios_native/b3/grid_a64_p16_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p17_00_m1.o /tmp/aios_native/b3/grid_a64_p17_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p17_01_m2.o /tmp/aios_native/b3/grid_a64_p17_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p17.gnu.elf /tmp/aios_native/b3/grid_a64_p17_00_m1.o /tmp/aios_native/b3/grid_a64_p17_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p18_00_m1.o /tmp/aios_native/b3/grid_a64_p18_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p18_01_m2.o /tmp/aios_native/b3/grid_a64_p18_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p18.gnu.elf /tmp/aios_native/b3/grid_a64_p18_00_m1.o /tmp/aios_native/b3/grid_a64_p18_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p19_00_m1.o /tmp/aios_native/b3/grid_a64_p19_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p19_01_m2.o /tmp/aios_native/b3/grid_a64_p19_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p19.gnu.elf /tmp/aios_native/b3/grid_a64_p19_00_m1.o /tmp/aios_native/b3/grid_a64_p19_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p20_00_m1.o /tmp/aios_native/b3/grid_a64_p20_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p20_01_m2.o /tmp/aios_native/b3/grid_a64_p20_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p20.gnu.elf /tmp/aios_native/b3/grid_a64_p20_00_m1.o /tmp/aios_native/b3/grid_a64_p20_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p21_00_m1.o /tmp/aios_native/b3/grid_a64_p21_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p21_01_m2.o /tmp/aios_native/b3/grid_a64_p21_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p21.gnu.elf /tmp/aios_native/b3/grid_a64_p21_00_m1.o /tmp/aios_native/b3/grid_a64_p21_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p22_00_m1.o /tmp/aios_native/b3/grid_a64_p22_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p22_01_m2.o /tmp/aios_native/b3/grid_a64_p22_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p22.gnu.elf /tmp/aios_native/b3/grid_a64_p22_00_m1.o /tmp/aios_native/b3/grid_a64_p22_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p23_00_m1.o /tmp/aios_native/b3/grid_a64_p23_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p23_01_m2.o /tmp/aios_native/b3/grid_a64_p23_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p23.gnu.elf /tmp/aios_native/b3/grid_a64_p23_00_m1.o /tmp/aios_native/b3/grid_a64_p23_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p24_00_m1.o /tmp/aios_native/b3/grid_a64_p24_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p24_01_m2.o /tmp/aios_native/b3/grid_a64_p24_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p24.gnu.elf /tmp/aios_native/b3/grid_a64_p24_00_m1.o /tmp/aios_native/b3/grid_a64_p24_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p25_00_m1.o /tmp/aios_native/b3/grid_a64_p25_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p25_01_m2.o /tmp/aios_native/b3/grid_a64_p25_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p25.gnu.elf /tmp/aios_native/b3/grid_a64_p25_00_m1.o /tmp/aios_native/b3/grid_a64_p25_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p26_00_m1.o /tmp/aios_native/b3/grid_a64_p26_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p26_01_m2.o /tmp/aios_native/b3/grid_a64_p26_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p26.gnu.elf /tmp/aios_native/b3/grid_a64_p26_00_m1.o /tmp/aios_native/b3/grid_a64_p26_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p27_00_m1.o /tmp/aios_native/b3/grid_a64_p27_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p27_01_m2.o /tmp/aios_native/b3/grid_a64_p27_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p27.gnu.elf /tmp/aios_native/b3/grid_a64_p27_00_m1.o /tmp/aios_native/b3/grid_a64_p27_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p28_00_m1.o /tmp/aios_native/b3/grid_a64_p28_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p28_01_m2.o /tmp/aios_native/b3/grid_a64_p28_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p28.gnu.elf /tmp/aios_native/b3/grid_a64_p28_00_m1.o /tmp/aios_native/b3/grid_a64_p28_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p29_00_m1.o /tmp/aios_native/b3/grid_a64_p29_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p29_01_m2.o /tmp/aios_native/b3/grid_a64_p29_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p29.gnu.elf /tmp/aios_native/b3/grid_a64_p29_00_m1.o /tmp/aios_native/b3/grid_a64_p29_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p30_00_m1.o /tmp/aios_native/b3/grid_a64_p30_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p30_01_m2.o /tmp/aios_native/b3/grid_a64_p30_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p30.gnu.elf /tmp/aios_native/b3/grid_a64_p30_00_m1.o /tmp/aios_native/b3/grid_a64_p30_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p31_00_m1.o /tmp/aios_native/b3/grid_a64_p31_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p31_01_m2.o /tmp/aios_native/b3/grid_a64_p31_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p31.gnu.elf /tmp/aios_native/b3/grid_a64_p31_00_m1.o /tmp/aios_native/b3/grid_a64_p31_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p32_00_m1.o /tmp/aios_native/b3/grid_a64_p32_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p32_01_m2.o /tmp/aios_native/b3/grid_a64_p32_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p32.gnu.elf /tmp/aios_native/b3/grid_a64_p32_00_m1.o /tmp/aios_native/b3/grid_a64_p32_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p33_00_m1.o /tmp/aios_native/b3/grid_a64_p33_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p33_01_m2.o /tmp/aios_native/b3/grid_a64_p33_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p33.gnu.elf /tmp/aios_native/b3/grid_a64_p33_00_m1.o /tmp/aios_native/b3/grid_a64_p33_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p34_00_m1.o /tmp/aios_native/b3/grid_a64_p34_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p34_01_m2.o /tmp/aios_native/b3/grid_a64_p34_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p34.gnu.elf /tmp/aios_native/b3/grid_a64_p34_00_m1.o /tmp/aios_native/b3/grid_a64_p34_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p35_00_m1.o /tmp/aios_native/b3/grid_a64_p35_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p35_01_m2.o /tmp/aios_native/b3/grid_a64_p35_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p35.gnu.elf /tmp/aios_native/b3/grid_a64_p35_00_m1.o /tmp/aios_native/b3/grid_a64_p35_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p36_00_m1.o /tmp/aios_native/b3/grid_a64_p36_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p36_01_m2.o /tmp/aios_native/b3/grid_a64_p36_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p36.gnu.elf /tmp/aios_native/b3/grid_a64_p36_00_m1.o /tmp/aios_native/b3/grid_a64_p36_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p37_00_m1.o /tmp/aios_native/b3/grid_a64_p37_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p37_01_m2.o /tmp/aios_native/b3/grid_a64_p37_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p37.gnu.elf /tmp/aios_native/b3/grid_a64_p37_00_m1.o /tmp/aios_native/b3/grid_a64_p37_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p38_00_m1.o /tmp/aios_native/b3/grid_a64_p38_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p38_01_m2.o /tmp/aios_native/b3/grid_a64_p38_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p38.gnu.elf /tmp/aios_native/b3/grid_a64_p38_00_m1.o /tmp/aios_native/b3/grid_a64_p38_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p39_00_m1.o /tmp/aios_native/b3/grid_a64_p39_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p39_01_m2.o /tmp/aios_native/b3/grid_a64_p39_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p39.gnu.elf /tmp/aios_native/b3/grid_a64_p39_00_m1.o /tmp/aios_native/b3/grid_a64_p39_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p40_00_m1.o /tmp/aios_native/b3/grid_a64_p40_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p40_01_m2.o /tmp/aios_native/b3/grid_a64_p40_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p40.gnu.elf /tmp/aios_native/b3/grid_a64_p40_00_m1.o /tmp/aios_native/b3/grid_a64_p40_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p41_00_m1.o /tmp/aios_native/b3/grid_a64_p41_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p41_01_m2.o /tmp/aios_native/b3/grid_a64_p41_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p41.gnu.elf /tmp/aios_native/b3/grid_a64_p41_00_m1.o /tmp/aios_native/b3/grid_a64_p41_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p42_00_m1.o /tmp/aios_native/b3/grid_a64_p42_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p42_01_m2.o /tmp/aios_native/b3/grid_a64_p42_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p42.gnu.elf /tmp/aios_native/b3/grid_a64_p42_00_m1.o /tmp/aios_native/b3/grid_a64_p42_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p43_00_m1.o /tmp/aios_native/b3/grid_a64_p43_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p43_01_m2.o /tmp/aios_native/b3/grid_a64_p43_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p43.gnu.elf /tmp/aios_native/b3/grid_a64_p43_00_m1.o /tmp/aios_native/b3/grid_a64_p43_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p44_00_m1.o /tmp/aios_native/b3/grid_a64_p44_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p44_01_m2.o /tmp/aios_native/b3/grid_a64_p44_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p44.gnu.elf /tmp/aios_native/b3/grid_a64_p44_00_m1.o /tmp/aios_native/b3/grid_a64_p44_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p45_00_m1.o /tmp/aios_native/b3/grid_a64_p45_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p45_01_m2.o /tmp/aios_native/b3/grid_a64_p45_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p45.gnu.elf /tmp/aios_native/b3/grid_a64_p45_00_m1.o /tmp/aios_native/b3/grid_a64_p45_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p46_00_m1.o /tmp/aios_native/b3/grid_a64_p46_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p46_01_m2.o /tmp/aios_native/b3/grid_a64_p46_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p46.gnu.elf /tmp/aios_native/b3/grid_a64_p46_00_m1.o /tmp/aios_native/b3/grid_a64_p46_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p47_00_m1.o /tmp/aios_native/b3/grid_a64_p47_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p47_01_m2.o /tmp/aios_native/b3/grid_a64_p47_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p47.gnu.elf /tmp/aios_native/b3/grid_a64_p47_00_m1.o /tmp/aios_native/b3/grid_a64_p47_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p48_00_m1.o /tmp/aios_native/b3/grid_a64_p48_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p48_01_m2.o /tmp/aios_native/b3/grid_a64_p48_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p48.gnu.elf /tmp/aios_native/b3/grid_a64_p48_00_m1.o /tmp/aios_native/b3/grid_a64_p48_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p49_00_m1.o /tmp/aios_native/b3/grid_a64_p49_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p49_01_m2.o /tmp/aios_native/b3/grid_a64_p49_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p49.gnu.elf /tmp/aios_native/b3/grid_a64_p49_00_m1.o /tmp/aios_native/b3/grid_a64_p49_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p50_00_m1.o /tmp/aios_native/b3/grid_a64_p50_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p50_01_m2.o /tmp/aios_native/b3/grid_a64_p50_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p50.gnu.elf /tmp/aios_native/b3/grid_a64_p50_00_m1.o /tmp/aios_native/b3/grid_a64_p50_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p51_00_m1.o /tmp/aios_native/b3/grid_a64_p51_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p51_01_m2.o /tmp/aios_native/b3/grid_a64_p51_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p51.gnu.elf /tmp/aios_native/b3/grid_a64_p51_00_m1.o /tmp/aios_native/b3/grid_a64_p51_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p52_00_m1.o /tmp/aios_native/b3/grid_a64_p52_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p52_01_m2.o /tmp/aios_native/b3/grid_a64_p52_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p52.gnu.elf /tmp/aios_native/b3/grid_a64_p52_00_m1.o /tmp/aios_native/b3/grid_a64_p52_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p53_00_m1.o /tmp/aios_native/b3/grid_a64_p53_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p53_01_m2.o /tmp/aios_native/b3/grid_a64_p53_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p53.gnu.elf /tmp/aios_native/b3/grid_a64_p53_00_m1.o /tmp/aios_native/b3/grid_a64_p53_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p54_00_m1.o /tmp/aios_native/b3/grid_a64_p54_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p54_01_m2.o /tmp/aios_native/b3/grid_a64_p54_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p54.gnu.elf /tmp/aios_native/b3/grid_a64_p54_00_m1.o /tmp/aios_native/b3/grid_a64_p54_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p55_00_m1.o /tmp/aios_native/b3/grid_a64_p55_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p55_01_m2.o /tmp/aios_native/b3/grid_a64_p55_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p55.gnu.elf /tmp/aios_native/b3/grid_a64_p55_00_m1.o /tmp/aios_native/b3/grid_a64_p55_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p56_00_m1.o /tmp/aios_native/b3/grid_a64_p56_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p56_01_m2.o /tmp/aios_native/b3/grid_a64_p56_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p56.gnu.elf /tmp/aios_native/b3/grid_a64_p56_00_m1.o /tmp/aios_native/b3/grid_a64_p56_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p57_00_m1.o /tmp/aios_native/b3/grid_a64_p57_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p57_01_m2.o /tmp/aios_native/b3/grid_a64_p57_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p57.gnu.elf /tmp/aios_native/b3/grid_a64_p57_00_m1.o /tmp/aios_native/b3/grid_a64_p57_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p58_00_m1.o /tmp/aios_native/b3/grid_a64_p58_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p58_01_m2.o /tmp/aios_native/b3/grid_a64_p58_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p58.gnu.elf /tmp/aios_native/b3/grid_a64_p58_00_m1.o /tmp/aios_native/b3/grid_a64_p58_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p59_00_m1.o /tmp/aios_native/b3/grid_a64_p59_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p59_01_m2.o /tmp/aios_native/b3/grid_a64_p59_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p59.gnu.elf /tmp/aios_native/b3/grid_a64_p59_00_m1.o /tmp/aios_native/b3/grid_a64_p59_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p60_00_m1.o /tmp/aios_native/b3/grid_a64_p60_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p60_01_m2.o /tmp/aios_native/b3/grid_a64_p60_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p60.gnu.elf /tmp/aios_native/b3/grid_a64_p60_00_m1.o /tmp/aios_native/b3/grid_a64_p60_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p61_00_m1.o /tmp/aios_native/b3/grid_a64_p61_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p61_01_m2.o /tmp/aios_native/b3/grid_a64_p61_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p61.gnu.elf /tmp/aios_native/b3/grid_a64_p61_00_m1.o /tmp/aios_native/b3/grid_a64_p61_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p62_00_m1.o /tmp/aios_native/b3/grid_a64_p62_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p62_01_m2.o /tmp/aios_native/b3/grid_a64_p62_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p62.gnu.elf /tmp/aios_native/b3/grid_a64_p62_00_m1.o /tmp/aios_native/b3/grid_a64_p62_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p63_00_m1.o /tmp/aios_native/b3/grid_a64_p63_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a64_p63_01_m2.o /tmp/aios_native/b3/grid_a64_p63_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a64_p63.gnu.elf /tmp/aios_native/b3/grid_a64_p63_00_m1.o /tmp/aios_native/b3/grid_a64_p63_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a2_p0_00_m1.o /tmp/aios_native/b3/grid_a2_p0_00_m1.s
+  /tmp/aios_native/b3/grid_a2_p0_00_m1.s: Assembler messages:
+  /tmp/aios_native/b3/grid_a2_p0_00_m1.s:17: Warning: .space repeat count is zero, ignored
+$ as --64 -o /tmp/aios_native/b3/grid_a2_p0_01_m2.o /tmp/aios_native/b3/grid_a2_p0_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a2_p0.gnu.elf /tmp/aios_native/b3/grid_a2_p0_00_m1.o /tmp/aios_native/b3/grid_a2_p0_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a2_p1_00_m1.o /tmp/aios_native/b3/grid_a2_p1_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a2_p1_01_m2.o /tmp/aios_native/b3/grid_a2_p1_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a2_p1.gnu.elf /tmp/aios_native/b3/grid_a2_p1_00_m1.o /tmp/aios_native/b3/grid_a2_p1_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a2_p1_00_m1.o /tmp/aios_native/b3/grid_a2_p1_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a2_p1_01_m2.o /tmp/aios_native/b3/grid_a2_p1_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a2_p1.gnu.elf /tmp/aios_native/b3/grid_a2_p1_00_m1.o /tmp/aios_native/b3/grid_a2_p1_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a4_p0_00_m1.o /tmp/aios_native/b3/grid_a4_p0_00_m1.s
+  /tmp/aios_native/b3/grid_a4_p0_00_m1.s: Assembler messages:
+  /tmp/aios_native/b3/grid_a4_p0_00_m1.s:17: Warning: .space repeat count is zero, ignored
+$ as --64 -o /tmp/aios_native/b3/grid_a4_p0_01_m2.o /tmp/aios_native/b3/grid_a4_p0_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a4_p0.gnu.elf /tmp/aios_native/b3/grid_a4_p0_00_m1.o /tmp/aios_native/b3/grid_a4_p0_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a4_p1_00_m1.o /tmp/aios_native/b3/grid_a4_p1_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a4_p1_01_m2.o /tmp/aios_native/b3/grid_a4_p1_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a4_p1.gnu.elf /tmp/aios_native/b3/grid_a4_p1_00_m1.o /tmp/aios_native/b3/grid_a4_p1_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a4_p3_00_m1.o /tmp/aios_native/b3/grid_a4_p3_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a4_p3_01_m2.o /tmp/aios_native/b3/grid_a4_p3_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a4_p3.gnu.elf /tmp/aios_native/b3/grid_a4_p3_00_m1.o /tmp/aios_native/b3/grid_a4_p3_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a8_p0_00_m1.o /tmp/aios_native/b3/grid_a8_p0_00_m1.s
+  /tmp/aios_native/b3/grid_a8_p0_00_m1.s: Assembler messages:
+  /tmp/aios_native/b3/grid_a8_p0_00_m1.s:17: Warning: .space repeat count is zero, ignored
+$ as --64 -o /tmp/aios_native/b3/grid_a8_p0_01_m2.o /tmp/aios_native/b3/grid_a8_p0_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a8_p0.gnu.elf /tmp/aios_native/b3/grid_a8_p0_00_m1.o /tmp/aios_native/b3/grid_a8_p0_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a8_p1_00_m1.o /tmp/aios_native/b3/grid_a8_p1_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a8_p1_01_m2.o /tmp/aios_native/b3/grid_a8_p1_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a8_p1.gnu.elf /tmp/aios_native/b3/grid_a8_p1_00_m1.o /tmp/aios_native/b3/grid_a8_p1_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a8_p7_00_m1.o /tmp/aios_native/b3/grid_a8_p7_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a8_p7_01_m2.o /tmp/aios_native/b3/grid_a8_p7_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a8_p7.gnu.elf /tmp/aios_native/b3/grid_a8_p7_00_m1.o /tmp/aios_native/b3/grid_a8_p7_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a16_p0_00_m1.o /tmp/aios_native/b3/grid_a16_p0_00_m1.s
+  /tmp/aios_native/b3/grid_a16_p0_00_m1.s: Assembler messages:
+  /tmp/aios_native/b3/grid_a16_p0_00_m1.s:17: Warning: .space repeat count is zero, ignored
+$ as --64 -o /tmp/aios_native/b3/grid_a16_p0_01_m2.o /tmp/aios_native/b3/grid_a16_p0_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a16_p0.gnu.elf /tmp/aios_native/b3/grid_a16_p0_00_m1.o /tmp/aios_native/b3/grid_a16_p0_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a16_p1_00_m1.o /tmp/aios_native/b3/grid_a16_p1_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a16_p1_01_m2.o /tmp/aios_native/b3/grid_a16_p1_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a16_p1.gnu.elf /tmp/aios_native/b3/grid_a16_p1_00_m1.o /tmp/aios_native/b3/grid_a16_p1_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a16_p15_00_m1.o /tmp/aios_native/b3/grid_a16_p15_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a16_p15_01_m2.o /tmp/aios_native/b3/grid_a16_p15_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a16_p15.gnu.elf /tmp/aios_native/b3/grid_a16_p15_00_m1.o /tmp/aios_native/b3/grid_a16_p15_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a32_p0_00_m1.o /tmp/aios_native/b3/grid_a32_p0_00_m1.s
+  /tmp/aios_native/b3/grid_a32_p0_00_m1.s: Assembler messages:
+  /tmp/aios_native/b3/grid_a32_p0_00_m1.s:17: Warning: .space repeat count is zero, ignored
+$ as --64 -o /tmp/aios_native/b3/grid_a32_p0_01_m2.o /tmp/aios_native/b3/grid_a32_p0_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a32_p0.gnu.elf /tmp/aios_native/b3/grid_a32_p0_00_m1.o /tmp/aios_native/b3/grid_a32_p0_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a32_p1_00_m1.o /tmp/aios_native/b3/grid_a32_p1_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a32_p1_01_m2.o /tmp/aios_native/b3/grid_a32_p1_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a32_p1.gnu.elf /tmp/aios_native/b3/grid_a32_p1_00_m1.o /tmp/aios_native/b3/grid_a32_p1_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a32_p31_00_m1.o /tmp/aios_native/b3/grid_a32_p31_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a32_p31_01_m2.o /tmp/aios_native/b3/grid_a32_p31_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a32_p31.gnu.elf /tmp/aios_native/b3/grid_a32_p31_00_m1.o /tmp/aios_native/b3/grid_a32_p31_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a128_p0_00_m1.o /tmp/aios_native/b3/grid_a128_p0_00_m1.s
+  /tmp/aios_native/b3/grid_a128_p0_00_m1.s: Assembler messages:
+  /tmp/aios_native/b3/grid_a128_p0_00_m1.s:17: Warning: .space repeat count is zero, ignored
+$ as --64 -o /tmp/aios_native/b3/grid_a128_p0_01_m2.o /tmp/aios_native/b3/grid_a128_p0_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a128_p0.gnu.elf /tmp/aios_native/b3/grid_a128_p0_00_m1.o /tmp/aios_native/b3/grid_a128_p0_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a128_p1_00_m1.o /tmp/aios_native/b3/grid_a128_p1_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a128_p1_01_m2.o /tmp/aios_native/b3/grid_a128_p1_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a128_p1.gnu.elf /tmp/aios_native/b3/grid_a128_p1_00_m1.o /tmp/aios_native/b3/grid_a128_p1_01_m2.o
+$ as --64 -o /tmp/aios_native/b3/grid_a128_p127_00_m1.o /tmp/aios_native/b3/grid_a128_p127_00_m1.s
+$ as --64 -o /tmp/aios_native/b3/grid_a128_p127_01_m2.o /tmp/aios_native/b3/grid_a128_p127_01_m2.s
+$ ld -z noexecstack -e _start -o /tmp/aios_native/b3/grid_a128_p127.gnu.elf /tmp/aios_native/b3/grid_a128_p127_00_m1.o /tmp/aios_native/b3/grid_a128_p127_01_m2.o
+grid: 82 cases, 9102 bytes compared, 0 differing; gap sizes 0..63 all covered at .align 64
+grid: OK (identical)
+total: 10762 bytes compared, 0 differing, 0 failed
+B3 PASSED (3 programs x2 link orders + 82 grid cases)

@@ -1,0 +1,28 @@
+=== B3 programs check: 4 programs, built ONLY by our assembler + ELF writer ===
+GNU as: GNU assembler (GNU Binutils for Ubuntu) 2.46 (byte-identity oracle only)
+--- exit42 ---
+exit42: emitted image byte identical to B1's 132-byte exit42 ELF
+exit42: 1 PT_LOAD RWX @0x400000, entry 0x400078, 132 bytes (B1 layout)
+exit42: 12 bytes == GNU as, W^X ELF, exit 42, stdout b'' (ours and GNU)
+exit42: OK (identical)
+--- hello ---
+hello: R-X PT_LOAD [0x400000,+8192) + RW- PT_LOAD [0x00402000,+14), entry 0x401000, 8206 bytes (W^X, no shared page)
+hello: 4110 bytes == GNU as, W^X ELF, exit 0, stdout b'Hello, world!\n' (ours and GNU)
+hello: OK (identical)
+--- sumloop ---
+sumloop: R-X PT_LOAD [0x400000,+8192) + RW- PT_LOAD [0x00402000,+48), entry 0x401000, 8240 bytes (W^X, no shared page)
+sumloop: 4144 bytes == GNU as, W^X ELF, exit 0, stdout b'500500\n' (ours and GNU)
+sumloop: OK (identical)
+--- read_weights (sparse 6171877376-byte file) ---
+read_weights: R-X PT_LOAD [0x400000,+8192) + RW- PT_LOAD [0x00402000,+24), entry 0x401000, 8216 bytes (W^X, no shared page)
+creating sparse 6171877376-byte weights file with 64-byte blocks at (0, 622333952, 6171873280)
+ours ELF: sparse run ok - out.bin 192 bytes == blocks at (0, 622333952, 6171873280)
+ours ELF: wrong path exits 2 (ENOENT), no crash
+ours ELF: wrong argc (1, 2, 4) all exit 2
+gnu  ELF: sparse run ok - out.bin 192 bytes == blocks at (0, 622333952, 6171873280)
+gnu  ELF: wrong path exits 2 (ENOENT), no crash
+gnu  ELF: wrong argc (1, 2, 4) all exit 2
+read_weights: 4120 bytes == GNU as, W^X ELF, sparse-file behavior targets all met (ours and GNU)
+read_weights: OK (identical)
+total: 12386 bytes compared against GNU as, 0 programs failed
+B3 programs PASSED (4 programs byte-identical to GNU as, W^X ELFs, fixed behavior targets incl. the sparse 6.17 GB file)

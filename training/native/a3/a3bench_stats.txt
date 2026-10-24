@@ -1,0 +1,8 @@
+=== make_a3bench_data (synthetic) ===
+  synthetic0                   rows=256    cols=256    n_exc=19585    decode_bad=0
+  synthetic1                   rows=128    cols=320    n_exc=12199    decode_bad=0
+matrices       : 2
+weights        : 106496
+exceptions     : 31784
+file bytes     : 531718 (0.5 MB)
+bf16 bytes     : 212992 (in-file raw stream)

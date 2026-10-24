@@ -1,0 +1,10 @@
+tokens: [785, 6722, 315, 9625, 374, 12095, 11, 323]
+exported params: 3085938688
+ref logits shape: (8, 151936)
+bit-exact params: 3085938688
+bit-exact mismatched bits: 0
+max abs diff: 6.306171e-05 (threshold 1e-3)
+argmax ref: [2701, 315, 279, 11, 12095, 13, 323, 279]
+argmax got: [2701, 315, 279, 11, 12095, 13, 323, 279]
+argmax match at all 8 positions: True
+REAL_CHECK PASSED

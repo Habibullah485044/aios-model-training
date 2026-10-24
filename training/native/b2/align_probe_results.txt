@@ -1,0 +1,34 @@
+=== align probe: GNU as .align 4096 pad in .text, 30 sample sizes ===
+k=1     nops                                     1
+k=2     nops                                     2
+k=10    nops                                     10
+k=64    nops                                     9 + 11x5
+k=86    nops                                     9 + 11x7
+k=87    nops                                     10 + 11x7
+k=88    EB rel8 +86 (lands at pad end)           9 + 11x7
+k=89    EB rel8 +87 (lands at pad end)           10 + 11x7
+k=100   EB rel8 +98 (lands at pad end)           10 + 11x8
+k=126   EB rel8 +124 (lands at pad end)          3 + 11x11
+k=127   EB rel8 +125 (lands at pad end)          4 + 11x11
+k=128   EB rel8 +126 (lands at pad end)          5 + 11x11
+k=129   EB rel8 +127 (lands at pad end)          6 + 11x11
+k=130   E9 rel32 +125 (lands at pad end)         4 + 11x11
+k=131   E9 rel32 +126 (lands at pad end)         5 + 11x11
+k=132   E9 rel32 +127 (lands at pad end)         6 + 11x11
+k=133   E9 rel32 +128 (lands at pad end)         7 + 11x11
+k=140   E9 rel32 +135 (lands at pad end)         3 + 11x12
+k=150   E9 rel32 +145 (lands at pad end)         2 + 11x13
+k=200   E9 rel32 +195 (lands at pad end)         8 + 11x17
+k=255   E9 rel32 +250 (lands at pad end)         8 + 11x22
+k=256   E9 rel32 +251 (lands at pad end)         9 + 11x22
+k=257   E9 rel32 +252 (lands at pad end)         10 + 11x22
+k=258   E9 rel32 +253 (lands at pad end)         11x23
+k=300   E9 rel32 +295 (lands at pad end)         9 + 11x26
+k=500   E9 rel32 +495 (lands at pad end)         11x45
+k=1000  E9 rel32 +995 (lands at pad end)         5 + 11x90
+k=2000  E9 rel32 +1995 (lands at pad end)        4 + 11x181
+k=4063  E9 rel32 +4058 (lands at pad end)        10 + 11x368
+k=4095  E9 rel32 +4090 (lands at pad end)        9 + 11x371
+sample: 30/30 pads match the candidate rule
+sweep: 310 cases, 0 mismatches
+align probe PASSED

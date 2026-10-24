@@ -1,0 +1,14 @@
+=== disk before pack ===
+df: Filesystem      Size  Used Avail Use% Mounted on
+df: overlay         8.0T  7.0T  1.1T  88% /
+$ gcc -std=c99 -Wall -Wextra -Werror -O2 /kaggle/working/training/native/phase2/unpack_ref.c -o /tmp/aios_native/unpack_ref
+compile OK -> /tmp/aios_native/unpack_ref
+=== pack ===
+tensors=434 weights=3085938688 exceptions=1358322
+per-tensor tables give 1358322 exceptions vs Phase 1 global-table 1897535 (-539213)
+predicted bytes (arithmetic): 4635707888 (4.6357 GB)
+actual     bytes            : 4635707888 (4.6357 GB)
+vs expected ~4.638 GB       : -0.0023 GB
+=== unpack + verify (bit-exact) ===
+unpack verify: mismatched_bits=0
+PHASE2 PASSED

@@ -1,0 +1,20 @@
+=== A4 packed-oracle check ===
+cross-probe x86_64-w64-mingw32-gcc: not found
+cross-probe i686-w64-mingw32-gcc: not found
+cross-probe wine: not found
+cross-probe wine64: not found
+=== unpack packed.bin -> unpacked.bin (reference unpacker) ===
+unpack_ref: unpack_ref: 434 tensors in index
+unpack_ref:   unpacked 100/434 tensors, 0 mismatched so far
+unpack_ref:   unpacked 200/434 tensors, 0 mismatched so far
+unpack_ref:   unpacked 300/434 tensors, 0 mismatched so far
+unpack_ref:   unpacked 400/434 tensors, 0 mismatched so far
+unpack_ref:   unpacked 434/434 tensors, 0 mismatched so far
+unpack_ref: unpack_ref: tensors=434 weights=3085938688 mismatched_bits=0
+unpacked bytes=6171877376 original bytes=6171877376 equal=True
+=== oracle on unpacked weights ===
+oracle: aios_infer: 8 tokens, 36 layers, 151936 vocab -> 1215488 logits written
+=== compare logits (bitwise) ===
+logits compared: 1215488  differing bits: 0 (threshold: 0)
+A4 VERDICT: packed oracle == BF16 oracle, bit-identical
+PHASE4 PASSED

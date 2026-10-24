@@ -1,0 +1,5 @@
+B1 ELF64 writer (132-byte exit42): PASS
+B2 assembler (byte-identical to GNU as): PASS
+B3 linker (byte-identical to GNU ld): PASS
+B4 runtime (syscalls/threads/timers): PASS
+PART B PASSED (4 steps)

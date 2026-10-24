@@ -1,0 +1,39 @@
+tensors: 434   total params: 3085938688
+
+== per tensor type ==
+type                                         params  distinct  entropy   top15%     exc%     bits4 bitsIdeal
+------------------------------------------------------------------------------------------------------------
+embed                                      311164928        31    2.585   99.985   0.0146    12.004    10.585
+layers.N.down.weight                       811597824        39    2.782   99.962   0.0384    12.009    10.782
+layers.N.gate.weight                       811597824        39    2.857   99.928   0.0720    12.017    10.857
+layers.N.input_layernorm.weight               73728        22    1.848   99.957   0.0434    12.010     9.848
+layers.N.k.bias                                9216        21    3.179   99.609   0.3906    12.094    11.179
+layers.N.k.weight                          18874368        30    2.742   99.970   0.0298    12.007    10.742
+layers.N.o.weight                          150994944        32    2.628   99.971   0.0291    12.007    10.628
+layers.N.post_attention_layernorm.weight      73728        24    1.528   99.976   0.0244    12.006     9.528
+layers.N.q.bias                               73728        23    3.062   99.840   0.1600    12.038    11.062
+layers.N.q.weight                          150994944        33    2.692   99.969   0.0310    12.007    10.692
+layers.N.up.weight                         811597824        38    2.853   99.943   0.0575    12.014    10.853
+layers.N.v.bias                                9216        20    3.074   99.805   0.1953    12.047    11.074
+layers.N.v.weight                          18874368        29    2.665   99.968   0.0323    12.008    10.665
+norm                                           2048         4    0.218  100.000   0.0000    12.000     8.218
+
+== totals (all 434 tensors, 3085938688 params) ==
+distinct exponents      : 46
+exponent entropy        : 2.7951 bits
+top-15 coverage         : 99.93851%
+exception count         : 1897535 (0.06149%)
+predicted packed size   : 12.0148 bits/weight  (4-bit format)
+ideal entropy size      : 10.7951 bits/weight  (reference)
+BF16                    : 16.0000 bits/weight
+predicted vs BF16       : 1.3317x smaller
+
+predicted packed bytes  : 4634600637 (4.635 GB)
+bf16 bytes (weights.bin): 6171877376 (6.172 GB)
+
+== cross-check vs brief (per-tensor, full tensor) ==
+embed                                      distinct=31 entropy=2.585 top15=99.9854% bits4=12.004
+layers.0.gate.weight                       distinct=29 entropy=2.661 top15=99.9671% bits4=12.008
+layers.10.down.weight                      distinct=32 entropy=2.592 top15=99.9770% bits4=12.006
+layers.10.k.weight                         distinct=23 entropy=2.678 top15=99.9729% bits4=12.007
+layers.10.q.weight                         distinct=26 entropy=2.661 top15=99.9673% bits4=12.008
